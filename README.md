@@ -11,7 +11,23 @@ Campinas, ___ de 2025
 
 ---
 
-<!-- INSIRA O CONTEÚDO DO SEU README AQUI! -->
+flowchart LR
+  subgraph Core0
+    UI[[task_input<br/>prio 3]]
+    LOGIC[[task_pet_logic<br/>prio 2]]
+    RGB[[task_rgb<br/>prio 0]]
+  end
+  subgraph Core1
+    MATRIX[[task_matrix<br/>prio 1]]
+    OLED[[task_oled<br/>prio 1]]
+    LIGHT[[task_light<br/>prio 2]]
+    FLASH[[task_storage<br/>prio 0]]
+  end
+
+  UI --> |feed/play/sleep| LOGIC
+  LOGIC --> |event queue| MATRIX & OLED & RGB
+  LIGHT --> |dark / light| LOGIC
+  LOGIC --> |snapshot| FLASH
 
 ---
 

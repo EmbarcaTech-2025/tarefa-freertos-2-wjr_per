@@ -136,7 +136,12 @@ to exclude the API function. */
 #define INCLUDE_xTaskGetHandle                  1
 #define INCLUDE_xTaskResumeFromISR              1
 #define INCLUDE_xQueueGetMutexHolder            1
-
+#define configNUMBER_OF_CORES 2
+#define configTICK_CORE       0        /* quem gera o SysTick */
+#define configUSE_CORE_AFFINITY 1
+#define configUSE_PASSIVE_IDLE_HOOK 0
 /* A header file that defines trace macro can be included here. */
 
 #endif /* FREERTOS_CONFIG_H */
+
+
