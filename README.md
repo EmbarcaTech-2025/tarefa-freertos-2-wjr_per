@@ -142,7 +142,8 @@ O sistema utiliza o escalonador preemptivo baseado em prioridades do FreeRTOS:
 - **Sensor de Luz**: Para detecção de condições de iluminação ambiente.
 - **LED RGB**: Para feedback visual adicional.
 
-
+## Vídeo de apresentação do projeto
+https://youtu.be/3lfrq4FYLzQ?si=J3e7ptaqZnk7wVG0
 ---
 
 ## 📜 Licença
