@@ -23,6 +23,7 @@ typedef struct {
     uint32_t age_sec;
     uint8_t  hunger;      // 0–10
     uint8_t  fun;         // 0–10
+    uint8_t  tiredness;   // 0–10
     bool     sleeping;
 } pet_state_t;
 

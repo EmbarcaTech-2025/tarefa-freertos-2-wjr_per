@@ -6,7 +6,7 @@ void task_input(void*), task_pet_logic(void*), task_light(void*);
 void task_matrix(void*), task_oled(void*), task_rgb(void*), task_storage(void*);
 
 /* ------------------------------------------------------------------ */
-pet_state_t       gPet  = { .age_sec = 0, .hunger = 0, .fun = 10, .sleeping = false };
+pet_state_t       gPet  = { .age_sec = 0, .hunger = 0, .fun = 10, .tiredness = 0, .sleeping = false };
 EventGroupHandle_t egPet;
 SemaphoreHandle_t  mtxPet;
 /* ------------------------------------------------------------------ */

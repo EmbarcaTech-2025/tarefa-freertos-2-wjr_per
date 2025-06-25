@@ -32,8 +32,10 @@ void task_oled(void *arg)
         ssd1306_draw_string(&disp,0,12,1,buf);
         snprintf(buf,sizeof(buf),"FUN  %u", gPet.fun);
         ssd1306_draw_string(&disp,0,24,1,buf);
-        snprintf(buf,sizeof(buf),"SLP  %s", gPet.sleeping?"YES":"NO");
+        snprintf(buf,sizeof(buf),"TIR  %u", gPet.tiredness);
         ssd1306_draw_string(&disp,0,36,1,buf);
+        snprintf(buf,sizeof(buf),"SLP  %s", gPet.sleeping?"YES":"NO");
+        ssd1306_draw_string(&disp,0,48,1,buf);
 
         xSemaphoreGive(mtxPet);
 

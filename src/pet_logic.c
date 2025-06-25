@@ -57,6 +57,18 @@ void task_pet_logic(void *arg)
             if (!gPet.sleeping) {
                 if (gPet.hunger < 10) gPet.hunger++;
                 if (gPet.fun    >  0) gPet.fun--;
+                
+                if (gPet.age_sec % 30 == 0 && gPet.tiredness < 10) {
+                    gPet.tiredness++;
+                }
+                
+                if (gPet.tiredness >= 10) {
+                    gPet.sleeping = true;
+                }
+            } else {
+                if (gPet.age_sec % 10 == 0 && gPet.tiredness > 0) {
+                    gPet.tiredness--;
+                }
             }
         }
 
