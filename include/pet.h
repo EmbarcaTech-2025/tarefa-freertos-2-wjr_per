@@ -16,6 +16,7 @@
 #define EVT_SLEEP  (1 << 2)
 #define EVT_WAKE   (1 << 3)
 #define EVT_TICK   (1 << 4)
+#define EVT_SNAKE_START  (1<<5)
 
 /* 𝟚  Estado persistente                                               */
 typedef struct {

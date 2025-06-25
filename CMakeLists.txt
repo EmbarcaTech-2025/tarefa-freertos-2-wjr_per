@@ -45,6 +45,7 @@ set(DRIVER_FILES   include/ssd1306_i2c.c)
 
 # Executável COM sufixo .elf  (fundamental p/ UF2)
 add_executable(pixel_pet.elf
+    src/snake.c  
     ${SRC_FILES}
     ${DRIVER_FILES}
     
