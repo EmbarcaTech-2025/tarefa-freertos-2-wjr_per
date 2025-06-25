@@ -1,11 +1,12 @@
 /*  src/input.c  –  leitura dos botões A e B
  *  A : alimentar (EVT_FEED)
- *  B : brincar   (EVT_PLAY)
- *  A+B : dormir/ acordar (EVT_SLEEP / EVT_WAKE)
+ *  B : brincar (jogo da cobrinha)
+ *  A+B : dormir / acordar (EVT_SLEEP / EVT_WAKE)
  */
 
 #include "pico/stdlib.h"
 #include "pet.h"
+#include "snake.h"
 
 #define BTN_A_PIN 5
 #define BTN_B_PIN 6
@@ -35,8 +36,8 @@ void task_input(void *arg)
         bool a = gpio_get(BTN_A_PIN);   /* 1 = solto, 0 = pressionado */
         bool b = gpio_get(BTN_B_PIN);
 
-        /* --- A + B juntos → alterna dormir/ acordar --------------- */
-        if (prevA && prevB && !a && !b) {              /* borda simultânea */
+        /* --- A + B juntos → alterna dormir/acordar ---------------- */
+        if (prevA && prevB && !a && !b) {
             if (!sleeping) {
                 xEventGroupSetBits(egPet, EVT_SLEEP);
                 sleeping = true;
@@ -45,14 +46,17 @@ void task_input(void *arg)
                 sleeping = false;
             }
         }
-        /* --- A sozinho → FEED ------------------------------------ */
-        else if (prevA && !a &&  b) {
+        /* --- A sozinho → FEED ------------------------------------- */
+        else if (prevA && !a && b) {
             xEventGroupSetBits(egPet, EVT_FEED);
         }
-        /* --- B sozinho → PLAY ------------------------------------ */
+        /* --- B sozinho → PLAY (minigame) ----------------------------------- */
         else if (prevB && !b &&  a) {
-            xEventGroupSetBits(egPet, EVT_PLAY);
-        }
+        if(!snake_is_running())      // começa novo jogo
+        snake_start();
+        xEventGroupSetBits(egPet, EVT_PLAY);     // continua aumentando FUN c/ lógica anterior
+}
+
 
         prevA = a;
         prevB = b;
