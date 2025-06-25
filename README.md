@@ -29,19 +29,16 @@ flowchart LR
   subgraph Core1
     MATRIX[[task_matrix<br/>prio 1]]
     OLED[[task_oled<br/>prio 1]]
-    LIGHT[[task_light<br/>prio 2]]
-    FLASH[[task_storage<br/>prio 0]]
   end
 
   UI --> |feed/play/sleep| LOGIC
   LOGIC --> |event queue| MATRIX & OLED & RGB
-  LIGHT --> |dark / light| LOGIC
   LOGIC --> |snapshot| FLASH
 ```
 
 ### Estrutura de Tarefas FreeRTOS
 
-O sistema é composto por 7 tarefas independentes, cada uma com sua própria responsabilidade e prioridade:
+O sistema é composto por 5 tarefas independentes, cada uma com sua própria responsabilidade e prioridade:
 
 1. **task_input** (Prioridade 3): Gerencia a entrada do usuário através dos botões A e B.
    - Detecta pressionamentos de botões e gera eventos correspondentes (alimentar, jogar, dormir/acordar).
@@ -52,25 +49,17 @@ O sistema é composto por 7 tarefas independentes, cada uma com sua própria res
    - Gera eventos de temporização (ticks) a cada 1 segundo usando um timer periódico.
    - Processa eventos de entrada do usuário e atualiza o estado do pet.
 
-3. **task_light** (Prioridade 2): Monitora condições de iluminação ambiente.
-   - Utiliza um sensor para detectar condições de luz/escuridão.
-   - Pode influenciar o comportamento do pet (por exemplo, tendência a dormir no escuro).
-
-4. **task_matrix** (Prioridade 1): Controla a matriz de LEDs WS2812 (5×5).
+3. **task_matrix** (Prioridade 1): Controla a matriz de LEDs WS2812 (5×5).
    - Exibe expressões faciais do pet (feliz, triste, dormindo).
    - Implementa o minigame da cobrinha (Snake) na matriz de LEDs.
    - Gerencia a atualização do estado de diversão durante o jogo.
 
-5. **task_oled** (Prioridade 1): Gerencia o display OLED.
+4. **task_oled** (Prioridade 1): Gerencia o display OLED.
    - Exibe informações detalhadas sobre o estado do pet (idade, fome, diversão, cansaço, estado de sono).
    - Atualiza o display a cada segundo (em resposta aos eventos de tick).
 
-6. **task_rgb** (Prioridade 0): Controla o LED RGB.
+5. **task_rgb** (Prioridade 0): Controla o LED RGB.
    - Fornece feedback visual adicional sobre o estado do pet.
-
-7. **task_storage** (Prioridade 0): Gerencia o armazenamento persistente.
-   - Salva periodicamente o estado do pet na memória flash.
-   - Permite que o estado do pet seja recuperado após reinicialização.
 
 ### Mecanismos de Comunicação e Sincronização
 
